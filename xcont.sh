@@ -17,9 +17,6 @@ function cntList() {
 
 newcnt=`cntList`
 
-
-#rm ~/Documents/script/sortedxcont* ~/Documents/script/xcontall.txt
-
 docker stop `echo $newcnt`
 if [ $? -eq 0 ]; then
 	echo -e "are Stoped\n"
@@ -32,4 +29,6 @@ fi
 
 docker ps -a | sed -e "s/CONTAINER.ID/CONTAINER_ID/g" | awk '{$1="";print}'
 echo -e "are Current Container\n"
+
+cd /tmp/ && rm `ls /tmp/xcont/|grep xcont`; cd $SCRIPT_DIR
 
