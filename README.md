@@ -56,9 +56,9 @@ foo
 hoge
 are Removed
 
- CONTAINER_ID NAMES STATUS
- 6a28f32c2b13 cowsay Up 4 minutes
- are Current Container
+CONTAINER_ID NAMES STATUS
+6a28f32c2b13 cowsay Up 4 minutes
+are Current Container
 
 $ docker ps -a --format "table {{.ID}} {{.Names}}"
 
