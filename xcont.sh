@@ -46,6 +46,6 @@ else
 fi
 
 ##################################################最新のコンテナ稼働状況を表示
-docker ps -a | sed -e "s/CONTAINER.ID/CONTAINER_ID/g" | awk '{$1="";print}'
+docker ps -a --format "table {{.ID}} {{.Names}} {{.Status}}" | sed -e "s/CONTAINER.ID/CONTAINER_ID/g"
 echo -e "are Current Container\n"
 
