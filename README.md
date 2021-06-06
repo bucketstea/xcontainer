@@ -1,7 +1,67 @@
-xcont
+## xcont
 
-=========================
+必要なコンテナのみ残し、それ以外のコンテナをすべて削除するシェルスクリプトです。
 
-削除したくないコンテナ以外をすべて削除するシェルスクリプトです。
-削除したくないコンテナのContainer Nameを.xcontignoreに改行区切りで記入します。
-xcont.shは走るときにスクリプトファイルと同じディレクトリにある.xcontignoreを読み込み、削除対象から除外します。
+#### How to use
+
+- 削除したくないコンテナのContainer Nameを.xcontignoreに改行区切りで記入します。
+  - __例：__
+  - `$ echo "cowsay" >> .xcontignore`
+
+- xcont.shは走るときにスクリプトファイルと同じディレクトリにある.xcontignoreを読み込み、削除対象から除外します。
+
+
+__例:__
+
+```bash
+$ docker run -itd --name cowsay alpine
+
+Unable to find image 'alpine:latest' locally
+latest: Pulling from library/alpine
+540db60ca938: Pull complete 
+Digest: sha256:69e70a79f2d41ab5d637de98c1e0b055206ba40a8145e7bddb55ccc04e13cf8f
+Status: Downloaded newer image for alpine:latest
+6a28f32c2b13f1d3bcff3bf4e796007322c3f5038d1af0c074b9f9f4d90667d3
+
+$ docker run -itd --name foo alpine
+
+15db6abd323d0daf76b408976043d45cf9f09f4b760be191ae78f07715d00092
+
+$ docker run -itd --name hoge alpine
+
+87fkdsaljob9809fdsa860860adsf7fdadfsa89860575656d9b9da89fda8769d
+
+$ docker ps -a --format "table {{.ID}} {{.Names}}"
+
+CONTAINER ID   NAMES
+6a28f32c2b13   cowsay
+15db6abd323d   foo   
+87fkdsaljob9   hoge
+
+$ echo "cowsay" >> .xcontignore
+$ cat .xcontignore
+
+cowsay
+
+$ xcont.sh
+
+cowsay 
+are Excluded
+
+foo
+hoge
+are Stoped
+
+foo
+hoge
+are Removed
+
+ CONTAINER_ID NAMES STATUS
+ 6a28f32c2b13 cowsay Up 4 minutes
+ are Current Container
+
+$ docker ps -a --format "table {{.ID}} {{.Names}}"
+
+CONTAINER ID   NAMES
+6a28f32c2b13   cowsay
+```
