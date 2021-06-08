@@ -1,20 +1,20 @@
 #!/bin/bash
 
 ##################################################カレントディレクトリの初期化
-SCRIPT_DIR=`dirname $0`
-cd $SCRIPT_DIR
+SCRIPT_DIR=`dirname $0`;
+cd $SCRIPT_DIR;
 
 ##################################################除外するコンテナ名nameをlistでecho
 isFile=".xcontignore";
 
 if [ -e $isFile ]; then
-    xcntlist=`cat .xcontignore`;
     cat .xcontignore | sed 's/ //g' | sed '/^$/d' > /tmp/ignorelist;
     xcntlistnull=/tmp/ignorelist;
     if [ -s $xcntlistnull ]; then
-        echo -e $xcntlist "\nare Excluded\n"
-        rm /tmp/ignorelist;
+        xcntlist=`cat .xcontignore;`
+        echo -e $xcntlist "\nare Excluded\n";
     fi
+    rm /tmp/ignorelist;
 fi
 
 ##################################################rm対象になるコンテナを絞り込む
@@ -28,24 +28,24 @@ function cntList() {
     rm -rf /tmp/xcont.d 2> /dev/null;
 }
 
-newcnt=`cntList`
+newcnt=`cntList`;
 
 ##################################################コンテナの停止・削除処理(停止・削除できた場合はその旨echo)
-docker stop `echo $newcnt` 2> /dev/null
+docker stop `echo $newcnt` 2> /dev/null;
 if [ $? -eq 0 ]; then
-    echo -e "are Stoped\n"
+    echo -e "are Stoped\n";
 else
-    echo -e "There are no stoppable containers\n"
+    echo -e "There are no stoppable containers\n";
 fi
 
-docker rm `echo $newcnt` 2> /dev/null
+docker rm `echo $newcnt` 2> /dev/null;
 if [ $? -eq 0 ]; then
-	echo -e "are Removed\n"
+	echo -e "are Removed\n";
 else
-    echo -e "There are no deletable containers\n"
+    echo -e "There are no deletable containers\n";
 fi
 
 ##################################################最新のコンテナ稼働状況を表示
-docker ps -a --format "table {{.ID}} {{.Names}} {{.Status}}" | sed -e "s/CONTAINER.ID/CONTAINER_ID/g"
-echo -e "are Current Container\n"
+docker ps -a --format "table {{.ID}} {{.Names}} {{.Status}}" | sed -e "s/CONTAINER.ID/CONTAINER_ID/g";
+echo -e "are Current Container\n";
 
