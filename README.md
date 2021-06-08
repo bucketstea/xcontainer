@@ -6,7 +6,7 @@
 
 - 削除したくないコンテナのContainer Nameを.xcontignoreに改行区切りで記入します。
   - __例：__
-  - `$ echo "cowsay" >> .xcontignore`
+  - `$ echo "buckets_container" >> .xcontignore`
 
 - xcont.shは走るときにスクリプトファイルと同じディレクトリにある.xcontignoreを読み込み、削除対象から除外します。
 
@@ -14,7 +14,7 @@
 __例:__
 
 ```bash
-$ docker run -itd --name cowsay alpine
+$ docker run -itd --name buckets_container alpine
 
 Unable to find image 'alpine:latest' locally
 latest: Pulling from library/alpine
@@ -34,18 +34,18 @@ $ docker run -itd --name hoge alpine
 $ docker ps -a --format "table {{.ID}} {{.Names}}"
 
 CONTAINER ID   NAMES
-6a28f32c2b13   cowsay
+6a28f32c2b13   buckets_container
 15db6abd323d   foo   
 87fkdsaljob9   hoge
 
-$ echo "cowsay" >> .xcontignore
+$ echo "buckets_container" >> .xcontignore
 $ cat .xcontignore
 
-cowsay
+buckets_container
 
 $ xcont.sh
 
-cowsay 
+buckets_container 
 are Excluded
 
 foo
@@ -57,11 +57,11 @@ hoge
 are Removed
 
 CONTAINER_ID NAMES STATUS
-6a28f32c2b13 cowsay Up 4 minutes
+6a28f32c2b13 buckets_container Up 4 minutes
 are Current Container
 
 $ docker ps -a --format "table {{.ID}} {{.Names}}"
 
 CONTAINER ID   NAMES
-6a28f32c2b13   cowsay
+6a28f32c2b13   buckets_container
 ```
