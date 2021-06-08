@@ -1,6 +1,7 @@
 ## xcont
 
 必要なコンテナのみ残し、それ以外のコンテナをすべて削除するシェルスクリプトです。
+You can leave only the containers you need, you can delete all other unnecessary containers.
 
 #### How to use
 
@@ -10,6 +11,9 @@
 
 - xcont.shは走るときにスクリプトファイルと同じディレクトリにある.xcontignoreを読み込み、削除対象から除外します。
 
+- Specify the names of the containers you do not want to delete in .xcontignore, separated by line breaksa.
+  - e.g. `$ echo "buckets_container" >> .xcontignore`
+- When xcont.sh runs, it reads .xcontignore in the same directory as the script file and excludes its containers from deletion.
 
 __例:__
 
