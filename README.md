@@ -18,7 +18,7 @@ You can leave only the containers you need, you can delete all other unnecessary
 __例:__
 
 ```bash
-$ docker run -itd --name buckets_container alpine
+$ docker run -d --name buckets_container alpine
 
 Unable to find image 'alpine:latest' locally
 latest: Pulling from library/alpine
@@ -27,11 +27,11 @@ Digest: sha256:69e70a79f2d41ab5d637de98c1e0b055206ba40a8145e7bddb55ccc04e13cf8f
 Status: Downloaded newer image for alpine:latest
 6a28f32c2b13f1d3bcff3bf4e796007322c3f5038d1af0c074b9f9f4d90667d3
 
-$ docker run -itd --name foo alpine
+$ docker run -d --name foo alpine
 
 15db6abd323d0daf76b408976043d45cf9f09f4b760be191ae78f07715d00092
 
-$ docker run -itd --name hoge alpine
+$ docker run -d --name hoge alpine
 
 87fkdsaljob9809fdsa860860adsf7fdadfsa89860575656d9b9da89fda8769d
 
